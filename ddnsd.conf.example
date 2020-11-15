@@ -1,0 +1,48 @@
+# DDNSD Configuration
+
+# IP address check frequency:
+update_freq = 60
+
+# Domain name and path to DNS zone files (format: yourdomain.com:/etc/bind/db.yourdomain.com) separated by ','
+zones = yourdomain.com:/etc/bind/db.yourdomain.com
+
+# A command that will be executed after DNS zone update (for example a script)
+post_update_cmd = /etc/ddns/script.sh
+
+
+
+
+# PuckDNS secondary DNS section
+# https://puck.nether.net/dns
+
+# Enable puck.nether.net Master IP Updater
+use_puckdns = false
+
+# Username and password
+puckdns_username = username
+puckdns_password = password
+
+# Master IP mode (0 = auto, 1 = ipv4, 2 = ipv6)
+puckdns_mode = 0
+
+#Domains to update separated by ','
+puckdns_domains = yourdomain.com 
+
+
+
+
+# HEDNS secondary DNS section
+# https://dns.he.net
+
+# Enable dns.he.net Master IP Updater
+use_hedns = false
+
+# Username and password
+hedns_username = username
+hedns_password = password
+
+# Master IP mode (0 = auto, 1 = ipv4, 2 = ipv6)
+hedns_mode = 0
+
+# Domains to update separated by ','
+hedns_domains = yourdomain.com
