@@ -3,6 +3,7 @@
 #include "curl_helper.h"
 #include "date_utils.h"
 #include "ddnsd.h"
+#include "file_utils.h"
 #include "inet_utils.h"
 #include "secondary/he_dns.h"
 #include "secondary/puck_dns.h"
@@ -25,7 +26,13 @@ int main(int argc, char** argv) {
 
     std::cout << "Starting " << DDNSD_VERSION << std::endl;
 
-    mkdir(CONFIG_DIR.c_str(), 640); // create config dir if it doesn't exist
+    if (!is_dir(CONFIG_DIR)) {
+        if (mkdir(CONFIG_DIR.c_str(), 640) == -1) {
+            std::cerr << "Directory " << CONFIG_DIR << " doesn't exist"
+                    << " and couldn't be created!" << std::endl;
+            return 1;
+        }
+    }
 
     std::fstream f;
 
