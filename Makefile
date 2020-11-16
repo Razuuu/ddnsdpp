@@ -17,7 +17,15 @@ PROJECT     := ddnsd++
 VERSION     := 1.0
 MAINTAINER  := Tim Zimmermann <tim@linux4.de>
 DEB_DEPENDS := bind9, systemd, libcurl4
-DESCRIPTION := DDNS daemon rewritten from scratch in C++
+
+DESCRIPTION := \
+DDDNSD++ is a background service to dynamically update\n\
+your IP-Adress in a DNS Zone file.\n\
+It currently supports two secondary dns services\n\
+which it is capable of updating master-ip for.\n\
+Supported secondary dns services are:\n\
+https://puck.nether.net/dns\n\
+https://dns.he.net\n
 
 CPPFLAGS := -O3 -Wall -Wextra -Werror
 CPPFLAGS += -DDDNSD_VERSION="\"$(PROJECT) $(VERSION)\""
@@ -51,10 +59,10 @@ clean:
 
 # Building debian package
 
-CONFIG_DIR := conf
-DEB_DIR    := $(OUT)/deb
-DEB_CDIR   := $(DEB_DIR)/DEBIAN
-DEB_NAME   := $(PROJECT)-$(VERSION)_$(PKG_ARCH).deb
+CONF_DIR := conf
+DEB_DIR  := $(OUT)/deb
+DEB_CDIR := $(DEB_DIR)/DEBIAN
+DEB_NAME := $(PROJECT)-$(VERSION)_$(PKG_ARCH).deb
 
 deb-pkg: $(OUT)/$(DEB_NAME)
 
@@ -72,7 +80,7 @@ $(OUT)/$(DEB_NAME): $(OUT)/$(PROJECT)
 
 	@mkdir -p $(DEB_DIR)/etc/ddns
 	@cp $(CONF_DIR)/ddnsd.conf.example $(DEB_DIR)/etc/ddns/ddnsd.conf
-	@echo "/etc/ddns/ddnsd.conf" >> $(DEB_CDIR)/conffiles
+	@echo "/etc/ddns/ddnsd.conf" > $(DEB_CDIR)/conffiles
 
 	@mkdir -p $(DEB_DIR)/lib/systemd/system
 	@cp $(CONF_DIR)/ddnsdpp.service $(DEB_DIR)/lib/systemd/system
