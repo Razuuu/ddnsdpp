@@ -1,3 +1,4 @@
+#
 # Copyright (C) 2020  Tim Zimmermann <tim@linux4.de>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -12,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 
 PROJECT     := ddnsd++
 VERSION     := 1.0
@@ -19,8 +21,8 @@ MAINTAINER  := Tim Zimmermann <tim@linux4.de>
 DEB_DEPENDS := bind9, systemd, libcurl4
 
 DESCRIPTION := \
-DDDNSD++ is a background service to dynamically update\n\
-your IP-Adress in a DNS Zone file.\n\
+DDNSD++ is a background service to dynamically update\n\
+your IP address in a DNS Zone file.\n\
 It currently supports two secondary dns services\n\
 which it is capable of updating master-ip for.\n\
 Supported secondary dns services are:\n\
