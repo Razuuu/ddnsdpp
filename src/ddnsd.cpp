@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
     if (argc > 1) {
         if(std::string("--version").compare(argv[1]) == 0) {
             std::cout << DDNSD_VERSION << std::endl;
+            std::cout << LICENSE << std::endl;
             return 0;
         }
     }
