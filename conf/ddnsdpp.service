@@ -1,0 +1,9 @@
+[Unit]
+Description=DDNSD++ (DDNS Daemon)
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/ddnsd++
+
+[Install]
+WantedBy=multi-user.target

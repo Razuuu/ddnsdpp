@@ -5,8 +5,6 @@
 
 #define MULTILINE(...) #__VA_ARGS__
 
-#define DDNSD_VERSION "DDNSD++ 1.0"
-
 #define V4_API "http://v4.ident.me"
 #define V6_API "http://v6.ident.me"
 
