@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 
-bind9_zone_parser::bind9_zone_parser(std::string file) {
+bind9_zone_parser::bind9_zone_parser(const std::string file) {
     this->file = file;
 }
 

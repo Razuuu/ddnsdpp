@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-std::string read_config(std::string config_path, std::string config_key) {
+std::string read_config(const std::string& config_path, const std::string& config_key) {
     std::fstream config;
     config.open(config_path, std::ios::in);
     std::string config_value;
@@ -24,13 +24,13 @@ std::string read_config(std::string config_path, std::string config_key) {
     return "";
 }
 
-bool read_config_bool(std::string config_path, std::string config_key) {
+bool read_config_bool(const std::string& config_path, const std::string& config_key) {
     std::string config_value = read_config(config_path, config_key);
 
     return config_value == "1" || config_value == "true";
 }
 
-long read_config_long(std::string config_path, std::string config_key) {
+long read_config_long(const std::string& config_path, const std::string& config_key) {
     try {
         return std::stol(read_config(config_path, config_key));
     } catch (std::invalid_argument& e) {

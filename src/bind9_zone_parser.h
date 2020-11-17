@@ -5,7 +5,7 @@
 
 class bind9_zone_parser {
     public:
-        bind9_zone_parser(std::string file);
+        explicit bind9_zone_parser(std::string file);
         ~bind9_zone_parser();
         long get_serial();
     private:

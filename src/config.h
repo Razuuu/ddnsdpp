@@ -3,10 +3,10 @@
 
 #include <string>
 
-std::string read_config(std::string config_path, std::string config_key);
+std::string read_config(const std::string& config_path, const std::string& config_key);
 
-bool read_config_bool(std::string config_path, std::string config_key);
+bool read_config_bool(const std::string& config_path, const std::string& config_key);
 
-long read_config_long(std::string config_path, std::string config_key);
+long read_config_long(const std::string& config_path, const std::string& config_key);
 
 #endif /* !_CONFIG_H */

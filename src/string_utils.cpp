@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-void replace_all(std::string& source, std::string from, std::string to) {
+void replace_all(std::string source, const std::string& from, const std::string& to) {
     if (!from.empty()) {
         std::string new_string;
         new_string.reserve(source.length());  // avoids a few memory allocations

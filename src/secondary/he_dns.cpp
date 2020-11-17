@@ -4,7 +4,7 @@
 #include <iostream>
 #include <regex>
 
-he_dns::he_dns(std::string username, std::string password) {
+he_dns::he_dns(const std::string username, const std::string password) {
     this->curl = new curl_helper();
     this->username = username;
     this->password = password;
@@ -15,7 +15,7 @@ he_dns::~he_dns() {
 }
 
 bool he_dns::element_with_attr_value_exists(
-        std::string html, std::string attr, std::string value) {
+        std::string html, const std::string attr, std::string value) {
     std::regex regex(attr + "=\"" + value + "\"");
     std::cmatch m;
 
@@ -23,7 +23,7 @@ bool he_dns::element_with_attr_value_exists(
 }
 
 std::string he_dns::value_of_element_with_attr_value(
-        std::string html, std::string attr, std::string value) {
+        std::string html, const std::string attr, std::string value) {
     std::regex regex(attr + "=\"" + value + "\" value=\"(.*)\"");
     std::cmatch m;
 
@@ -42,7 +42,7 @@ bool he_dns::is_deleted(std::string html, std::string domain) {
     return !this->element_with_attr_value_exists(html, "name", domain);
 }
 
-bool he_dns::is_added(std::string html, std::string domain) {
+bool he_dns::is_added(const std::string html, const std::string domain) {
     return !is_deleted(html, domain);
 }
 
