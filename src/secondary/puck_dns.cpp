@@ -3,26 +3,22 @@
 #include <iostream>
 
 puck_dns::puck_dns(const std::string username, const std::string password) {
-    this->curl = new curl_helper();
+    this->curl = curl_helper();
     this->username = username;
     this->password = password;
 }
 
-puck_dns::~puck_dns() {
-    delete curl;
-}
-
 bool puck_dns::login() {
-    curl->post_get_content(PUCK_BASE_URL + "login", "username=" + username + "&password=" + password);
-    return curl->get_status() == 302;
+    curl.post_get_content(PUCK_BASE_URL + "login", "username=" + username + "&password=" + password);
+    return curl.get_status() == 302;
 }
 
 bool puck_dns::update(const std::string domain, const std::string ip) {
     if (this->login()) {
-        curl->post_get_content(PUCK_BASE_URL + "dnsinfo/edit/" + domain, "domainname=" + domain + "&masterip=" + ip
+        curl.post_get_content(PUCK_BASE_URL + "dnsinfo/edit/" + domain, "domainname=" + domain + "&masterip=" + ip
                 + "&aa=Y&submit=Submit");
 
-        if (curl->get_status() == 302) {
+        if (curl.get_status() == 302) {
             std::cout << "PuckDNS successfully updated " << domain << std::endl;
             return true;
         } else {

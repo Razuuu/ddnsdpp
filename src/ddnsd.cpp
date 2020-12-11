@@ -36,17 +36,17 @@ int main(int argc, char** argv) {
 
     std::fstream f;
 
-    curl_helper* curl = new curl_helper();
+    curl_helper curl;
 
     if (!is_inet4_address(read_config(OLDIP, "oldip"))) {
         f.open(OLDIP, std::ios::out);
-        f << "oldip = " << curl->get_content(V4_API) << std::endl;
+        f << "oldip = " << curl.get_content(V4_API) << std::endl;
         f.close();
     }
 
     if (!is_inet6_address(read_config(OLDIP6, "oldip6"))) {
         f.open(OLDIP6, std::ios::out);
-        f << "oldip6 = " << curl->get_content(V6_API) << std::endl;
+        f << "oldip6 = " << curl.get_content(V6_API) << std::endl;
         f.close();
     }
 
@@ -59,13 +59,13 @@ int main(int argc, char** argv) {
     bool use_puckdns = read_config_bool(CONFIG, "use_puckdns");
     long puckdns_mode = read_config_long(CONFIG, "puckdns_mode");
     std::vector<std::string> puckdns_domains = split(read_config(CONFIG, "puckdns_domains"), ',');
-    puck_dns* puckdns = new puck_dns(read_config(CONFIG, "puckdns_username"), read_config(CONFIG, "puckdns_password"));
+    puck_dns puckdns(read_config(CONFIG, "puckdns_username"), read_config(CONFIG, "puckdns_password"));
 
     // HE.net DNS settings
     bool use_hedns = read_config_bool(CONFIG, "use_hedns");
     long hedns_mode = read_config_long(CONFIG, "hedns_mode");
     std::vector<std::string> hedns_domains = split(read_config(CONFIG, "hedns_domains"), ',');
-    he_dns* hedns = new he_dns(read_config(CONFIG, "hedns_username"), read_config(CONFIG, "hedns_password"));
+    he_dns hedns(read_config(CONFIG, "hedns_username"), read_config(CONFIG, "hedns_password"));
 
     f.open(PIDFILE, std::ios::out);
     f << getpid() << std::endl;
@@ -77,8 +77,8 @@ int main(int argc, char** argv) {
         std::string oldip = read_config(OLDIP, "oldip");
         std::string oldip6 = read_config(OLDIP6, "oldip6");
 
-        std::string ip = curl->get_content(V4_API);
-        std::string ip6 = curl->get_content(V6_API);
+        std::string ip = curl.get_content(V4_API);
+        std::string ip6 = curl.get_content(V6_API);
 
         if (!is_inet4_address(ip)) {
             std::cerr << "Failed to get valid IPv4 address!" << std::endl;
@@ -97,15 +97,15 @@ int main(int argc, char** argv) {
 
             if (use_puckdns) {
                 for (std::string puckdomain : puckdns_domains) {
-                    puckdns->update(puckdomain,
-                            puckdns->get_ip_for_mode(puckdns_mode, ip, ip6));
+                    puckdns.update(puckdomain,
+                            puckdns.get_ip_for_mode(puckdns_mode, ip, ip6));
                 }
             }
 
             if (use_hedns) {
                 for (std::string hedomain : hedns_domains) {
-                    hedns->update(hedomain,
-                            hedns->get_ip_for_mode(hedns_mode, ip, ip6));
+                    hedns.update(hedomain,
+                            hedns.get_ip_for_mode(hedns_mode, ip, ip6));
                 }
             }
 
@@ -128,9 +128,8 @@ int main(int argc, char** argv) {
                 if (f.is_open()) {
                     f.close();
 
-                    bind9_zone_parser* parser = new bind9_zone_parser(zone_path);
-                    long serial_parsed = parser->get_serial();
-                    delete parser;
+                    bind9_zone_parser parser(zone_path);
+                    long serial_parsed = parser.get_serial();
                     std::string current_serial = std::to_string(serial_parsed);
 
                     if (current_serial.length() == 10) {
@@ -202,8 +201,4 @@ int main(int argc, char** argv) {
 
         sleep(update_freq);
     }
-
-    delete curl;
-    delete puckdns;
-    delete hedns;
 }

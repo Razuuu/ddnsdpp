@@ -10,12 +10,11 @@ class he_dns : public secondary_dns {
 
     public:
         he_dns(std::string username, std::string password);
-        virtual ~he_dns();
         bool login() override;
         bool update(std::string domain, std::string ip) override;
 
     private:
-        curl_helper* curl;
+        curl_helper curl;
         std::string username;
         std::string password;
 
