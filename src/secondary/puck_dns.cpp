@@ -2,11 +2,8 @@
 
 #include <iostream>
 
-puck_dns::puck_dns(const std::string username, const std::string password) {
-    this->curl = curl_helper();
-    this->username = username;
-    this->password = password;
-}
+puck_dns::puck_dns(const std::string username, const std::string password) :
+curl(curl_helper()), username(username), password(password) {}
 
 bool puck_dns::login() {
     curl.post_get_content(PUCK_BASE_URL + "login", "username=" + username + "&password=" + password);

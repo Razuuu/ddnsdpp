@@ -4,11 +4,8 @@
 #include <iostream>
 #include <regex>
 
-he_dns::he_dns(const std::string username, const std::string password) {
-    this->curl = curl_helper();
-    this->username = username;
-    this->password = password;
-}
+he_dns::he_dns(const std::string username, const std::string password) :
+curl(curl_helper()), username(username), password(password) {}
 
 bool he_dns::element_with_attr_value_exists(
         std::string html, const std::string attr, std::string value) {

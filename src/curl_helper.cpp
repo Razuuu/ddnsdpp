@@ -7,14 +7,15 @@ static size_t write_callback(void *contents, size_t size, size_t nmemb,
     return size * nmemb;
 }
 
-curl_helper::curl_helper() {
-    curl = curl_easy_init();
-    curl_easy_setopt(curl, CURLOPT_COOKIEJAR, std::string(CONFIG_DIR + ".cookies.ddns").c_str());
+curl_helper::curl_helper() : curl(curl_easy_init()) {
+    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, ""); // enable cookies without writing them to a file
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
 }
 
 curl_helper::~curl_helper() {
-    curl_easy_cleanup(curl);
+    if (curl) {
+        curl_easy_cleanup(curl);
+    }
 }
 
 std::string curl_helper::get_content(std::string url) {

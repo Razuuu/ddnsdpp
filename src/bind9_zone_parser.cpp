@@ -6,12 +6,8 @@
 #include <fstream>
 #include <iostream>
 
-bind9_zone_parser::bind9_zone_parser(const std::string file) {
-    this->file = file;
-}
-
-bind9_zone_parser::~bind9_zone_parser() {
-}
+bind9_zone_parser::bind9_zone_parser(const std::string file) :
+file(file) {}
 
 long bind9_zone_parser::get_serial() {
     std::string tmp;
