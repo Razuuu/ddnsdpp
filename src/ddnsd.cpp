@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
                     std::string current_serial = std::to_string(serial_parsed);
 
                     if (current_serial.length() == 10) {
-                        std::string current_serial_date = current_serial.substr(0, 9);
+                        std::string current_serial_date = current_serial.substr(0, 8);
                         int version = atoi(current_serial.substr(9).c_str());
                         std::string current_date = time_format("%Y%m%d");
 
