@@ -86,6 +86,8 @@ int main(int argc, char** argv) {
             f << "oldip6 = " << ip6 << std::endl;
             f.close();
 
+            std::cout << "Command executed: " << post_update_cmd.c_str() << std::endl;
+
             system(post_update_cmd.c_str());
         }
 
