@@ -17,7 +17,7 @@
 #
 
 PROJECT     := ddnsd++
-VERSION     := 1.0
+VERSION     := 1.1
 MAINTAINER  := Tim Zimmermann <tim@linux4.de>, Joshua Samenfink <joshua@razuuu.de>
 DEB_DEPENDS := bind9, systemd, libcurl4
 
