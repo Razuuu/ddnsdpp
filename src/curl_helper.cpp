@@ -27,27 +27,3 @@ std::string curl_helper::get_content(std::string url) {
 
     return read_buffer;
 }
-
-long curl_helper::get_status() {
-    long res;
-
-    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &res);
-
-    return res;
-}
-
-std::string curl_helper::post_get_content(std::string url, std::string postfields) {
-    std::string read_buffer;
-
-    curl_easy_setopt(curl, CURLOPT_POST, 1);
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postfields.c_str());
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &read_buffer);
-    curl_easy_perform(curl);
-
-    return read_buffer;
-}
-
-std::string curl_helper::urlencode(std::string raw) {
-    return std::string(curl_easy_escape(curl, raw.c_str(), raw.length()));
-}

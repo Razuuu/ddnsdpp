@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2020  Tim Zimmermann <tim@linux4.de>
+# Copyright (C) 2020-2023  Tim Zimmermann <tim@linux4.de>
+#                          Joshua Samenfink <joshua@razuuu.de>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -17,17 +18,12 @@
 
 PROJECT     := ddnsd++
 VERSION     := 1.0
-MAINTAINER  := Tim Zimmermann <tim@linux4.de>
+MAINTAINER  := Tim Zimmermann <tim@linux4.de>, Joshua Samenfink <joshua@razuuu.de>
 DEB_DEPENDS := bind9, systemd, libcurl4
 
 DESCRIPTION := \
-DDNSD++ is a background service to dynamically update\n\
-your IP address in a DNS Zone file.\n\
-It currently supports two secondary dns services\n\
-which it is capable of updating master-ip for.\n\
-Supported secondary dns services are:\n\
-https://puck.nether.net/dns\n\
-https://dns.he.net\n
+DDNSD++ is a background service for detecting your IP\n\
+address and run a specific command.\n
 
 CPPFLAGS := -O3 -Wall -Wextra -Werror
 CPPFLAGS += -DDDNSD_VERSION="\"$(PROJECT) $(VERSION)\""

@@ -9,7 +9,7 @@
 #define V6_API "http://v6.ident.me"
 
 #define LICENSE \
-"Copyright (C) 2020  Tim Zimmermann <tim@linux4.de>\n\
+"Copyright (C) 2020-2023  Tim Zimmermann <tim@linux4.de>, Joshua Samenfink <joshua@razuuu.de>\n\
 This program is free software: you can redistribute it and/or modify\n\
 it under the terms of the GNU Affero General Public License as\n\
 published by the Free Software Foundation, either version 3 of the\n\

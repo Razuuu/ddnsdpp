@@ -10,9 +10,6 @@ class curl_helper {
         curl_helper();
         ~curl_helper();
         std::string get_content(std::string url);
-        long get_status();
-        std::string post_get_content(std::string url, std::string postfields);
-        std::string urlencode(std::string raw);
 
     private:
         CURL* curl;
