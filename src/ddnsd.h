@@ -5,9 +5,6 @@
 
 #define MULTILINE(...) #__VA_ARGS__
 
-#define V4_API "http://v4.ident.me"
-#define V6_API "http://v6.ident.me"
-
 #define LICENSE \
 "Copyright (C) 2020  Tim Zimmermann <tim@linux4.de>\n\
 This program is free software: you can redistribute it and/or modify\n\

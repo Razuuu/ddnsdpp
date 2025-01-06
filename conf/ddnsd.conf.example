@@ -9,6 +9,10 @@ zones = yourdomain.com:/etc/bind/db.yourdomain.com
 # A command that will be executed after DNS zone update (for example a script)
 post_update_cmd = /etc/ddns/script.sh
 
+# Get IP
+v4_api = http://v4.ident.me
+v6_api = http://v6.ident.me
+
 
 
 

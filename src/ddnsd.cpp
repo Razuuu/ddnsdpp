@@ -38,22 +38,12 @@ int main(int argc, char** argv) {
 
     curl_helper curl;
 
-    if (!is_inet4_address(read_config(OLDIP, "oldip"))) {
-        f.open(OLDIP, std::ios::out);
-        f << "oldip = " << curl.get_content(V4_API) << std::endl;
-        f.close();
-    }
-
-    if (!is_inet6_address(read_config(OLDIP6, "oldip6"))) {
-        f.open(OLDIP6, std::ios::out);
-        f << "oldip6 = " << curl.get_content(V6_API) << std::endl;
-        f.close();
-    }
-
     // Main settings
     long update_freq = read_config_long(CONFIG, "update_freq");
     std::vector<std::string> zones = split(read_config(CONFIG, "zones"), ',');
     std::string post_update_cmd = read_config(CONFIG, "post_update_cmd");
+    std::string v4_api = read_config(CONFIG, "v4_api");
+    std::string v6_api = read_config(CONFIG, "v6_api");
 
     // PuckDNS settings
     bool use_puckdns = read_config_bool(CONFIG, "use_puckdns");
@@ -67,6 +57,18 @@ int main(int argc, char** argv) {
     std::vector<std::string> hedns_domains = split(read_config(CONFIG, "hedns_domains"), ',');
     he_dns hedns(read_config(CONFIG, "hedns_username"), read_config(CONFIG, "hedns_password"));
 
+    if (!is_inet4_address(read_config(OLDIP, "oldip"))) {
+        f.open(OLDIP, std::ios::out);
+        f << "oldip = " << curl.get_content(v4_api) << std::endl;
+        f.close();
+    }
+
+    if (!is_inet6_address(read_config(OLDIP6, "oldip6"))) {
+        f.open(OLDIP6, std::ios::out);
+        f << "oldip6 = " << curl.get_content(v6_api) << std::endl;
+        f.close();
+    }
+
     f.open(PIDFILE, std::ios::out);
     f << getpid() << std::endl;
     f.close();
@@ -77,8 +79,8 @@ int main(int argc, char** argv) {
         std::string oldip = read_config(OLDIP, "oldip");
         std::string oldip6 = read_config(OLDIP6, "oldip6");
 
-        std::string ip = curl.get_content(V4_API);
-        std::string ip6 = curl.get_content(V6_API);
+        std::string ip = curl.get_content(v4_api);
+        std::string ip6 = curl.get_content(v6_api);
 
         if (!is_inet4_address(ip)) {
             std::cerr << "Failed to get valid IPv4 address!" << std::endl;
